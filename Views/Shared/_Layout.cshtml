@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/jqueryui")
+    @Styles.Render("~/Content/kendo/2016.3.1118/css")
+    @Styles.Render("~/Scripts/datepicker-fr.js")
+    @Styles.Render("~/Scripts/angular.min.js")
+
+    <script src="~/Scripts/jquery-1.12.4.js" type="text/javascript"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    @*These are for DataTables*@
+
+@*<script src="~/Scripts/TableTools.js" type="text/javascript"></script>
+<script src="~/Scripts/dataTables.tableTools.js" type="text/javascript"></script>*@
+<script src="~/Scripts/ZeroClipboard-test.js" type="text/javascript"></script>
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery.dataTables.min.js" type="text/javascript"></script> 
+
+@*These are for styling Control*@
+<link href="~/Content/TableTools.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/dataTables.tableTools.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/TableTools_JUI.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/themes/base/jquery.ui.css" rel="stylesheet" type="text/css" />
+    
+    
+
+    <script src="@Url.Content("~/Scripts/jquery-3.1.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="Content/MenuGauche.css" />
+    <link rel="stylesheet" href="Content/bootstrap-datetimepicker.css" />
+
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+
+    <script src="~/Scripts/jquery-1.12.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    
+    <script src="~/Scripts/datepicker-fr.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    
+    <script src="Scripts/bootstrap-datetimepicker.js"></script>
+    
+    <script src="Scripts/kendo/2016.3.1118/kendo.all.min.js"></script>
+    <script src="Scripts/kendo/2016.3.1118/cultures/kendo.culture.fr-FR.min.js"></script>
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+
+    <link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    
+    @*@Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")*@
+
+    
+    
+</head>
+<body>
+    @*<div>
+        <ul class="mainmenu">
+            <li><img src="images/user.png" alt="User icon" class="icon"><span>Account<span></li>
+            <ul class="submenu">
+                <div class="expand-triangle"></div>
+                <li><span>Basics</span></li>
+                <li><span>Picture</span></li>
+                <li><span>Go Premium</span></li>
+            </ul>
+            <li><img src="images/envelope.png" alt="Envelope icon" class="icon"><span>Messages</span><div class="messages">23</div></li>
+            <ul class="submenu">
+                <div class="expand-triangle"></div>
+                <li><span>New</span></li>
+                <li><span>Sent</span></li>
+                <li><span>Trash</span></li>
+            </ul>
+            <li><img src="images/cog.png" alt="Cog icon" class="icon"><span>Settings</span></li>
+            <ul class="submenu">
+                <div class="expand-triangle"></div>
+                <li><span>Language</span></li>
+                <li><span>Password</span></li>
+                <li><span><a href="http://www.jqueryscript.net/tags.php?/Notification/">Notification</a>s</span></li>
+                <li><span>Privacy</span></li>
+                <li><span>Payments</span></li>
+            </ul>
+            <li><img src="images/key.png" alt="Key icon" class="icon"><span>Logout</span></li>
+        </ul>
+    </div>*@
+
+    @*<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    @*<nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+        </div>
+        </div>*@
+        <div class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <form class="navbar-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="q">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        @*@if(Request.IsAuthenticated && User.IsInRole("Utilisateur"))
+                        {*@ 
+                        <li>@Html.ActionLink("Direction", "Index", "Direction")</li>
+                        <li>@Html.ActionLink("Employe", "Index", "Employe")</li>
+                        @*}*@
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Categorie", "Index", "Categorie")</li>
+                        <li>@Html.ActionLink("Articles", "Index", "Articles")</li>
+
+                        <li>@Html.ActionLink("Livraison", "Index", "Livraison")</li>
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Parametre<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                               
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>@Html.ActionLink("Entrer Stock", "Index", "BonEntrer")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Role", "Index", "Role")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+
+                @*<div class="col-md-3">
+
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                        <input type="text" name="searchDirection" id="myInput" onkeyup="recherche()" value="@ViewBag.CurrentFilter" class="form-control" style="width:260px" placeholder="rechercher">
+
+
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->*@
+
+            </div>
+        </div>
+    <div class="container body-content">
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+   
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/kendo/2016.3.1118")
+    
+    @*<script>
+        $(function(){
+            $(".jqueryui-marcker-datepicker").datepicker({
+                dateFormat:"yy-mm-dd",
+                changeYear:true,
+                showOn:"button"
+            }).css("display","inline-block")
+        .next("button").button({
+            icons:{primary:"ui-icon-calendar"},
+            label:"Select a date",
+            text:false
+        });
+        
+        });
+
+    </script>*@
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+﻿@model StockApp.Models.TB_employe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Details de l'employe <strong>@Model.Nom  @Model.Prenom</strong></h2>
+
+<div>
+    @*<h4>Employee</h4>*@
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Date Creer
+            @*@Html.DisplayNameFor(model => model.DateCreer)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreer)
+        </dd>
+
+        <dt>
+            Creer Par
+            @*@Html.DisplayNameFor(model => model.CreerPar)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreerPar)
+        </dd>
+
+        <dt>
+            Direction
+            @*@Html.DisplayNameFor(model => model.TB_direction.Nom_direction)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_direction.Nom_direction)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id_employe })" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Modifier
+    </a>
+    <a href="@Url.Action("Index")" class="btn btn-info btn-sm">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</p>

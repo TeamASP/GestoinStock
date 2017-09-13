@@ -1,0 +1,117 @@
+﻿@*//@model IEnumerable<StockApp.Models.TB_livraison>*@
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<StockApp.Models.TB_livraison>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Liste des fiches de livraison</h2>
+
+@using (Html.BeginForm("Index", "direction", FormMethod.Get))
+{
+
+    <p>
+
+        <div class="row">
+            <div class="col-md-8">
+                <a href="@Url.Action("Create")" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Fiche
+                </a>
+            </div>
+            <div class="col-md-3">
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <input type="text" name="searchDirection" id="myInput" onkeyup="recherche()" value="@ViewBag.CurrentFilter" class="form-control" style="width:260px" placeholder="rechercher">
+
+
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+
+        </div><!-- /.row -->
+    </p>
+}
+<table class="table table-hover table-condensed" id="myTable">
+    <tr class="info text-center">
+        <th>
+            Code Fiche
+
+        </th>
+        <th>
+            Date Livraison
+        </th>
+        <th>
+            Fiche fichier
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Date Creer
+        </th>
+        <th>
+            Creer Par
+        </th>
+        <th>
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code_fiche)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Image_fiche)*@
+                @Razor_Methode.Truncate(item.Image_fiche, 20)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Description)*@
+                @Razor_Methode.Truncate(item.Description, 20)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreerPar)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Id_livraison })" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Editer">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="@Url.Action("Details", new { id = item.Id_livraison })" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Afficher">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.Id_livraison })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="supprimer">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+
+                <a href="/Livraison/Download/?fileName=@(item.ImageUrl)" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Telecharger">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                </a>
+                @*<a class="title" href="/Livraison/Download/?p=@(item.ImageUrl)&d=@(item.ImageUrl)">@item.Image_fiche</a>
+
+                @Html.ActionLink("Download", "Download","Livraison", new { id = item.Id_livraison })*@
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="pagedList">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+PagedListRenderOptions.PageNumbersOnly)
+</div>

@@ -1,0 +1,57 @@
+﻿@model StockApp.Models.TB_lot_entrestock
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TB_lot_entrestock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_entrer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_entrer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TB_articles.Nom_articles)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_articles.Nom_articles)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TB_bonEntre.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TB_bonEntre.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

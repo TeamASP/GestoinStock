@@ -1,0 +1,107 @@
+﻿@model StockApp.Models.TB_employe
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info">Ajouter un Employee</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Nom </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2"> Prenom</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prenom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Prenom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Telephone</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telephone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_direction, "Nom Direction", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_direction",null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_direction)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Description</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control",rows=4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+        @Html.LabelFor(model => model.DateCreer, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateCreer)
+            @Html.ValidationMessageFor(model => model.DateCreer)
+        </div>
+    </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreerPar, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.CreerPar)*@
+              @*  @Html.ActionLink(model=> model.CreerPar User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                @Html.ValidationMessageFor(model => model.CreerPar)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Ajouter
+                </button>
+
+                <button type="reset" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-erase"></span> Reinitialiser
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,118 @@
+﻿@*@model IEnumerable<StockApp.Models.TB_direction>*@
+
+@model PagedList.IPagedList<StockApp.Models.TB_direction>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    }
+    <h2 class="text-info">Liste des directions</h2>
+    @using (Html.BeginForm("Index", "direction", FormMethod.Get))
+    {
+
+        <p>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign"></span> Nouvelle Direction
+                    </a>
+                </div>
+                <div class="col-md-3">
+
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                        <input type="text" name="searchDirection" id="myInput" onkeyup="recherche()" value="@ViewBag.CurrentFilter" class="form-control" style="width:260px" placeholder="rechercher">
+
+
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+
+            </div><!-- /.row -->
+        </p>
+    }
+    <table class="table table-hover table-condensed" id="myTable">
+        <tr class="info text-center">
+            <th>
+                @Html.ActionLink("Nom Categorie", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                
+            </th>
+            <th>
+                Descrition
+                
+            </th>
+            <th>
+                Date Creer
+                 
+            </th>
+            <th>
+                Creer Par
+                 
+            </th>
+            <th>
+                Action |
+                <a href="@Url.Action("Create")" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="Ajouter">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </th>
+            <th>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) sur @Model.PageCount</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom_direction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreerPar)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id=item.Id_direction})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Editer">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="@Url.Action("Details", new { id = item.Id_direction })" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="Afficher">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id_direction })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                       title="supprimer">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+<br />
+
+<div class="row panel-footer" >
+    <div class=" col-sm-4">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) sur @Model.PageCount
+    </div>
+    <div class =" col-sm-8">
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+       new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    </div>
+</div>

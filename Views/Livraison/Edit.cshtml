@@ -1,0 +1,153 @@
+﻿@model StockApp.Models.TB_livraison
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-info"> Fiche Livraison <strong>@Model.Code_fiche </strong> est editer</h2>
+
+
+@using (Html.BeginForm("Edit", "Livraison", null, FormMethod.Post, new { enctype = "multipart/form-data" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4 class="text-danger">Voulez vous modifier La fiche <strong>@Model.Code_fiche</strong></h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_livraison)
+        @Html.HiddenFor(model => model.Image_fiche)
+        @Html.HiddenFor(model => model.ImageUrl)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Code de la Fiche</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Code_fiche, new { htmlAttributes = new { @class = " form-control" } })
+                @Html.ValidationMessageFor(model => model.Code_fiche)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Date livraison</label>
+            <script type="text/javascript">
+                $(function () {
+                    $.datepicker.setDefaults($.datepicker.regional["fr"]);
+                    $("#datepicker11").datepicker();
+                });
+            </script>
+
+            <div class="col-md-10 demo-section k-content">
+                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datepicker1 ", @id = "datepicker1", style = "width: 281px", placeholder = @DateTime.Now } })
+                @Html.ValidationMessageFor(model => model.Date)
+            </div>
+            <script type="text/javascript">
+                $(function () { // will trigger when the document is ready
+                    $('.datepicker1').datepicker(); //Initialise any date pickers
+                    $(".datepicker1").datepicker($.datepicker.regional["fr"]);
+                });
+            </script>
+            </div>
+
+        <div id="modifier" style="display: none" class="form-group">
+
+            <label class="control-label col-md-2">Fiche livraison</label>
+
+            <div class="col-md-10">
+                <input type="file" name="file" multiple="multiple" class="form-control btn-info" />
+                @Html.ValidationMessageFor(model => model.Image_fiche)
+            </div>
+           
+        </div>
+        <div id="non_modifier" style="display: block" class="form-group">
+
+            <label class="control-label col-md-2">Fiche livraison</label>
+
+            <div class="col-md-10">
+                <input type="text" name="files" multiple="multiple" value="@Model.Image_fiche" readonly="readonly" class="form-control btn-info" /> 
+                @Html.ValidationMessageFor(model => model.Image_fiche)
+            </div>
+
+        </div>
+
+               
+        <div class="form-group">
+            <label class="col-md-2"></label>
+            <div class="col-md-10">
+                @Html.CheckBox("Remenber", false, new { onclick = "ShowHideDiv(this)" }) <label>Modifier la fiche</label>
+                @*<input id="Remember" name="Remember" type="checkbox" value="true" onclick="ShowHideDiv(this)" /> <label class="control-label">Fiche livraison</label>*@
+            </div>
+        </div>
+        
+
+        <script type="text/javascript">
+            function ShowHideDiv(Remember) {
+                var dvPassport = document.getElementById("modifier");
+                var dvPassport2 = document.getElementById("non_modifier");
+
+                if(Remember.checked)
+                {
+                    dvPassport.style.display = "block";
+                    dvPassport2.style.display = "none";
+                }
+                else
+                {
+                    dvPassport.style.display = "none";
+                    dvPassport2.style.display = "block";
+                }
+               
+            }
+        </script>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = " form-control", rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Date Creer</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateCreer, new { htmlAttributes = new { @class = " form-control" } })
+                @Html.ValidationMessageFor(model => model.DateCreer)
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Creer Par</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreerPar, new { htmlAttributes = new { @class = " form-control" } })
+                @Html.ValidationMessageFor(model => model.CreerPar)
+            </div>
+        </div>*@
+
+       
+
+         <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-save"></span> Enregistrer la modification
+                </button>
+
+                <a href="@Url.Action("Index")" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Annuler
+                </a>
+
+            </div>
+        </div>
+        
+    </div>
+}
+
+<div>
+    <a href="@Url.Action("Index")" class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/datepicker-fr.js")
+    @Scripts.Render("~/Scripts/MonScripts.js")
+}

@@ -1,0 +1,127 @@
+﻿@*@model IEnumerable<StockApp.Models.TB_employe>*@
+@model PagedList.IPagedList<StockApp.Models.TB_employe>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+}
+
+<h2 class="text-info">Liste des employes</h2>
+
+<p>
+    <div class="row">
+        <div class="col-md-8">
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus-sign"></span> Nouveau Employe
+            </a>
+        </div>
+        <div class="col-md-3">
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary " type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+                <input type="text" name="searchCategorie" id="myInput" onkeyup="recherche()" value="@ViewBag.CurrentFilter" class="form-control" style="width:260px" placeholder="rechercher">
+
+
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
+    </div><!-- /.row -->
+</p>
+<p>
+    @Html.DropDownList(
+    "paging",
+    new SelectList(
+        new List<int> { 1, 5, 10 }, ViewBag.rowsPerPage),
+    new { onchange = @"form.submit();" })
+</p>
+<table class="table table-hover table-condensed" id="myTable">
+    <tr class="info text-center">
+        <th>
+            Nom
+        </th>
+        <th>
+            Prenom
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Telephone
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Date Creer
+        </th>
+        <th>
+            Creer Par
+        </th>
+        <th>
+            Direction
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Razor_Methode.Truncate(item.Email, 20)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Razor_Methode.Truncate(item.Description, 20)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreerPar)
+            </td>
+            <td>
+                @Razor_Methode.Truncate(item.TB_direction.Nom_direction, 20)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.Id_employe})" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Editer">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="@Url.Action("Details", new { id = item.Id_employe })" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="Afficher">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+                <a href="@Url.Action("Delete", new { id = item.Id_employe })" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top"
+                   title="supprimer">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) sur @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

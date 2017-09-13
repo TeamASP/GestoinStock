@@ -1,0 +1,158 @@
+﻿@model StockApp.Models.TB_lot_entrestock
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>TB_lot_entrestock @Model.Id_bon_entrestock</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id_lot_entrestock)
+        @Html.HiddenFor(model=>model.Id_bon_entrestock)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Date_entrer, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Date_entrer)
+                @Html.ValidationMessageFor(model => model.Date_entrer)
+            </div>
+        </div>*@
+        <div class="form-group">
+            <label class="control-label col-md-2">Categorie </label>
+            <div class="col-md-10">
+                @*@Html.DropDownList("Id_categorie",
+      new SelectList(ViewBag.Categorie as System.Collections.IEnumerable, "Id_categorie", "Nom_categorie"),
+"-- Select Categorie --", new { @id = "ldCategorie", @name = "ldCategorie", @class = "pc form-control" })*@
+                @*<span class="error">choisi categorie</span>*@
+
+                @*@Html.DropDownList("Id_articles",
+               new SelectList(ViewBag.Articles as System.Collections.IEnumerable, "Id_articles", "Nom_articles"),
+"-- Select Article --", new { @id = "ldArticle", @name = "ldArticle", @class = "product form-control", @disabled = "disabled" })*@
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Id_articles, "Id_articles", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_articles", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_articles)
+               
+               
+                </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Id_bon_entrestock, "Id_bon_entrestock", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Id_bon_entrestock", new {@class="form-control" })
+                @Html.EditorFor(model => model.Id_bon_entrestock)
+                @Html.ValidationMessageFor(model => model.Id_bon_entrestock)
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantite, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantite, new { HtmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantite)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+   
+    <a href="/LotEntrer/Index/?id=@(Model.Id_bon_entrestock)" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Telecharger">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+
+    $(document).ready(function () {
+
+        $("[id$=ldCategorie]").change(function () {
+            var CountryID = $(this).val();
+            var select = $("#ldArticle");
+            var Quantite = $("#Quantite");
+            if (CountryID != "") {
+                $.getJSON("/LotEntrer/LoadStatesByCountryID", { CountryID: CountryID },
+                  function (StatesData) {
+                      select.removeAttr('disabled');
+                      Quantite.removeAttr('disabled')
+                      select.empty();
+                      select.append($('<option/>', { value: 0, text: "-- Select Article --" }));
+                      $.each(StatesData, function (index, itemData) {
+                          select.append($('<option/>',
+                        {
+                            value: itemData.Value,
+                            text: itemData.Text
+                        }));
+                      });
+                  });
+            }
+            else {
+                //select.attr('disabled', 'disabled');
+                select.val(0);
+                var State = $("#ddlCity");
+                //State.attr('disabled', 'disabled');
+                State.val(0);
+                //Quantite.attr('disabled', 'disabled')
+            }
+        });
+
+        $("#ldLivraison").change(function () {
+            var StateID = $(this).val();
+            var select = $("#ldCategorie");
+            if (StateID != 0) {
+                $.getJSON("../BonEntrer/Loadcategorie", { StateID: StateID },
+                 function (CitiesData) {
+                     select.removeAttr('disabled');
+                     select.empty();
+                     select.append($('<option/>', { value: 0, text: "-- Select Categorie --" }));
+                     $.each(CitiesData, function (index, itemData) {
+                         select.append($('<option/>',
+                            {
+                                value: itemData.Value,
+                                text: itemData.Text
+                            }));
+                     });
+                 });
+            }
+
+
+            else {
+
+
+                select.attr('disabled', 'disabled');
+                select.val(0);
+            }
+
+        });
+    });
+</script>
+    }
+    

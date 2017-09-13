@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="dc3c9fbbf74741699e2e23b2d1baa666" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="stockfaesdbModel.sysdiagram" Width="1.5" PointX="9.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_articles" Width="1.5" PointX="2.625" PointY="1" IsExpanded="true" FillColor="128, 255, 128" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_categorie" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_direction" Width="1.5" PointX="6.375" PointY="1.375" IsExpanded="true" FillColor="Red" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_employe" Width="1.5" PointX="4.375" PointY="1.375" IsExpanded="true" FillColor="Red" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_livraison" Width="1.5" PointX="0.5" PointY="3.5" IsExpanded="true" FillColor="Maroon" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_mouvement_stock" Width="1.5" PointX="7.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_stock" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_user" Width="1.5" PointX="10.375" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_articles_TB_categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_employe_TB_direction" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_stock_TB_articles" ManuallyRouted="false" >
+        </AssociationConnector>
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_bonEntre" Width="1.5" PointX="5.375" PointY="4.75" FillColor="Maroon" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_bonRequisition" Width="1.625" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_detail_requisition" Width="1.75" PointX="11" PointY="4" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_detail_sortie" Width="1.625" PointX="7.375" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_lot_entrestock" Width="1.75" PointX="2.875" PointY="4.75" FillColor="Maroon" IsExpanded="true" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_lot_entrestock_TB_articles" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_bonEntre_TB_livraison" />
+        <AssociationConnector Association="stockfaesdbModel.FK_TB_lot_entrestock_TB_bonEntre" />
+        <EntityTypeShape EntityType="stockfaesdbModel.TB_bonSortie_stock" Width="1.75" PointX="0.5" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

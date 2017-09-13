@@ -1,0 +1,65 @@
+﻿@model IEnumerable<StockApp.Models.TB_lot_entrestock>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+
+    <a href="/BonEntrer/Create" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Telecharger">
+        <span class="glyphicon glyphicon-plus-sign"></span> Ajouter 
+    </a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_entrer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TB_articles.Nom_articles)
+        </th>
+        <th>
+            Code Fiche
+           @*@Html.DisplayNameFor(model => model.TB_bonEntre.Description)*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_entrer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_articles.Nom_articles)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TB_bonEntre.TB_livraison.Code_fiche)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_lot_entrestock }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_lot_entrestock }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_lot_entrestock })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    <a href="/BonEntrer/Index" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top"
+       title="Telecharger">
+        <span class="glyphicon glyphicon-arrow-left"></span> Retourner a la liste
+    </a>
+</div>

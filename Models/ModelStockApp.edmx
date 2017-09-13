@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="stockfaesdbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FileDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="Extension" Type="varchar(max)" />
+          <Property Name="Idlivraison" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TB_articles">
+          <Key>
+            <PropertyRef Name="Id_articles" />
+          </Key>
+          <Property Name="Id_articles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_articles" Type="varchar" MaxLength="100" />
+          <Property Name="Qte_alerte" Type="int" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Id_categorie" Type="int" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_bonEntre">
+          <Key>
+            <PropertyRef Name="Id_bon_entrestock" />
+          </Key>
+          <Property Name="Id_bon_entrestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_entre" Type="date" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Id_livraison" Type="int" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_bonRequisition">
+          <Key>
+            <PropertyRef Name="Id_bon_requisition" />
+          </Key>
+          <Property Name="Id_bon_requisition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="aprouvepar" Type="varchar" MaxLength="100" />
+          <Property Name="Id_emloye" Type="int" />
+          <Property Name="Date_requisition" Type="date" />
+          <Property Name="DateCeer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_bonSortie_stock">
+          <Key>
+            <PropertyRef Name="Id_bon_sortiestock" />
+          </Key>
+          <Property Name="Id_bon_sortiestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Id_employe" Type="int" />
+          <Property Name="Date_sortie" Type="date" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_categorie">
+          <Key>
+            <PropertyRef Name="Id_categorie" />
+          </Key>
+          <Property Name="Id_categorie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_categorie" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_detail_requisition">
+          <Key>
+            <PropertyRef Name="id_details_requisition" />
+          </Key>
+          <Property Name="id_details_requisition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_bon_requisition" Type="int" Nullable="false" />
+          <Property Name="Id_articles" Type="int" Nullable="false" />
+          <Property Name="Quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_detail_sortie">
+          <Key>
+            <PropertyRef Name="Id_details_sortie" />
+          </Key>
+          <Property Name="Id_details_sortie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_bonsortie" Type="int" />
+          <Property Name="Id_lot_entrestock" Type="int" />
+          <Property Name="Quantite" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_direction">
+          <Key>
+            <PropertyRef Name="Id_direction" />
+          </Key>
+          <Property Name="Id_direction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_direction" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_employe">
+          <Key>
+            <PropertyRef Name="Id_employe" />
+          </Key>
+          <Property Name="Id_employe" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="100" />
+          <Property Name="Prenom" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Id_direction" Type="int" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_livraison">
+          <Key>
+            <PropertyRef Name="Id_livraison" />
+          </Key>
+          <Property Name="Id_livraison" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code_fiche" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Image_fiche" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+          <Property Name="ImageUrl" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TB_lot_entrestock">
+          <Key>
+            <PropertyRef Name="Id_lot_entrestock" />
+          </Key>
+          <Property Name="Id_lot_entrestock" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_entrer" Type="datetime" />
+          <Property Name="Id_articles" Type="int" />
+          <Property Name="Id_bon_entrestock" Type="int" />
+          <Property Name="Quantite" Type="int" />
+          <Property Name="Total" Type="bigint" />
+        </EntityType>
+        <EntityType Name="TB_mouvement_stock">
+          <Key>
+            <PropertyRef Name="Id_mouvement" />
+          </Key>
+          <Property Name="Id_mouvement" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="Type_mouvement" Type="int" />
+          <Property Name="Quantite" Type="int" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+          <Property Name="Id_article" Type="int" />
+        </EntityType>
+        <EntityType Name="TB_stock">
+          <Key>
+            <PropertyRef Name="Id_stock" />
+          </Key>
+          <Property Name="Id_stock" Type="int" Nullable="false" />
+          <Property Name="Stock_initial" Type="int" />
+          <Property Name="Qte_entre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Qte_sortie" Type="int" />
+          <Property Name="Qte_reste" Type="int" />
+          <Property Name="Id_articles" Type="int" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TB_user">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" />
+          <Property Name="Login" Type="nvarchar" MaxLength="100" />
+          <Property Name="Motdepasse" Type="nvarchar" MaxLength="100" />
+          <Property Name="Role" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateCreer" Type="datetime" />
+          <Property Name="CreerPar" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_TB_articles_TB_categorie">
+          <End Role="TB_categorie" Type="Self.TB_categorie" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_categorie">
+              <PropertyRef Name="Id_categorie" />
+            </Principal>
+            <Dependent Role="TB_articles">
+              <PropertyRef Name="Id_categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_bonEntre_TB_livraison">
+          <End Role="TB_livraison" Type="Self.TB_livraison" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_livraison">
+              <PropertyRef Name="Id_livraison" />
+            </Principal>
+            <Dependent Role="TB_bonEntre">
+              <PropertyRef Name="Id_livraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_employe_TB_direction">
+          <End Role="TB_direction" Type="Self.TB_direction" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TB_employe" Type="Self.TB_employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_direction">
+              <PropertyRef Name="Id_direction" />
+            </Principal>
+            <Dependent Role="TB_employe">
+              <PropertyRef Name="Id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_lot_entrestock_TB_articles">
+          <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_articles">
+              <PropertyRef Name="Id_articles" />
+            </Principal>
+            <Dependent Role="TB_lot_entrestock">
+              <PropertyRef Name="Id_articles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_lot_entrestock_TB_bonEntre">
+          <End Role="TB_bonEntre" Type="Self.TB_bonEntre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TB_lot_entrestock" Type="Self.TB_lot_entrestock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_bonEntre">
+              <PropertyRef Name="Id_bon_entrestock" />
+            </Principal>
+            <Dependent Role="TB_lot_entrestock">
+              <PropertyRef Name="Id_bon_entrestock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="stockfaesdbModelStoreContainer">
+          <EntitySet Name="FileDetail" EntityType="Self.FileDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_articles" EntityType="Self.TB_articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_bonEntre" EntityType="Self.TB_bonEntre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_bonRequisition" EntityType="Self.TB_bonRequisition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_bonSortie_stock" EntityType="Self.TB_bonSortie_stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_categorie" EntityType="Self.TB_categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_detail_requisition" EntityType="Self.TB_detail_requisition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_detail_sortie" EntityType="Self.TB_detail_sortie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_direction" EntityType="Self.TB_direction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_employe" EntityType="Self.TB_employe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_livraison" EntityType="Self.TB_livraison" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_lot_entrestock" EntityType="Self.TB_lot_entrestock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_mouvement_stock" EntityType="Self.TB_mouvement_stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_stock" EntityType="Self.TB_stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_user" EntityType="Self.TB_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TB_articles_TB_categorie" Association="Self.FK_TB_articles_TB_categorie">
+            <End Role="TB_categorie" EntitySet="TB_categorie" />
+            <End Role="TB_articles" EntitySet="TB_articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_bonEntre_TB_livraison" Association="Self.FK_TB_bonEntre_TB_livraison">
+            <End Role="TB_livraison" EntitySet="TB_livraison" />
+            <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_employe_TB_direction" Association="Self.FK_TB_employe_TB_direction">
+            <End Role="TB_direction" EntitySet="TB_direction" />
+            <End Role="TB_employe" EntitySet="TB_employe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_lot_entrestock_TB_articles" Association="Self.FK_TB_lot_entrestock_TB_articles">
+            <End Role="TB_articles" EntitySet="TB_articles" />
+            <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_lot_entrestock_TB_bonEntre" Association="Self.FK_TB_lot_entrestock_TB_bonEntre">
+            <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+            <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="stockfaesdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TB_articles">
+          <Key>
+            <PropertyRef Name="Id_articles" />
+          </Key>
+          <Property Name="Id_articles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_articles" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Qte_alerte" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Id_categorie" Type="Int32" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_categorie" Relationship="Self.FK_TB_articles_TB_categorie" FromRole="TB_articles" ToRole="TB_categorie" />
+          <NavigationProperty Name="TB_stock" Relationship="stockfaesdbModel.FK_TB_stock_TB_articles" FromRole="TB_articles" ToRole="TB_stock" />
+          <NavigationProperty Name="TB_lot_entrestock" Relationship="stockfaesdbModel.FK_TB_lot_entrestock_TB_articles" FromRole="TB_articles" ToRole="TB_lot_entrestock" />
+        </EntityType>
+        <EntityType Name="TB_categorie">
+          <Key>
+            <PropertyRef Name="Id_categorie" />
+          </Key>
+          <Property Name="Id_categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_categorie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_articles" Relationship="Self.FK_TB_articles_TB_categorie" FromRole="TB_categorie" ToRole="TB_articles" />
+        </EntityType>
+        <EntityType Name="TB_direction">
+          <Key>
+            <PropertyRef Name="Id_direction" />
+          </Key>
+          <Property Name="Id_direction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_direction" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TB_employe" Relationship="stockfaesdbModel.FK_TB_employe_TB_direction" FromRole="TB_direction" ToRole="TB_employe" />
+        </EntityType>
+        <EntityType Name="TB_employe">
+          <Key>
+            <PropertyRef Name="Id_employe" />
+          </Key>
+          <Property Name="Id_employe" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id_direction" Type="Int32" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_direction" Relationship="stockfaesdbModel.FK_TB_employe_TB_direction" FromRole="TB_employe" ToRole="TB_direction" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TB_livraison">
+          <Key>
+            <PropertyRef Name="Id_livraison" />
+          </Key>
+          <Property Name="Id_livraison" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code_fiche" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Image_fiche" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_bonEntre" Relationship="stockfaesdbModel.FK_TB_bonEntre_TB_livraison" FromRole="TB_livraison" ToRole="TB_bonEntre" />
+        </EntityType>
+        <EntityType Name="TB_mouvement_stock">
+          <Key>
+            <PropertyRef Name="Id_mouvement" />
+          </Key>
+          <Property Name="Id_mouvement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="Type_mouvement" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_article" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_stock">
+          <Key>
+            <PropertyRef Name="Id_stock" />
+          </Key>
+          <Property Name="Id_stock" Type="Int32" Nullable="false" />
+          <Property Name="Stock_initial" Type="Int32" />
+          <Property Name="Qte_entre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Qte_sortie" Type="Int32" />
+          <Property Name="Qte_reste" Type="Int32" />
+          <Property Name="Id_articles" Type="Int32" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_articles" Relationship="stockfaesdbModel.FK_TB_stock_TB_articles" FromRole="TB_stock" ToRole="TB_articles" />
+        </EntityType>
+        <EntityType Name="TB_user">
+          <Key>
+            <PropertyRef Name="ID_User" />
+          </Key>
+          <Property Name="ID_User" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Motdepasse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_TB_articles_TB_categorie">
+          <End Role="TB_categorie" Type="Self.TB_categorie" Multiplicity="0..1" />
+          <End Role="TB_articles" Type="Self.TB_articles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_categorie">
+              <PropertyRef Name="Id_categorie" />
+            </Principal>
+            <Dependent Role="TB_articles">
+              <PropertyRef Name="Id_categorie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="stockfaesdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TB_articles" EntityType="Self.TB_articles" />
+          <EntitySet Name="TB_categorie" EntityType="Self.TB_categorie" />
+          <EntitySet Name="TB_direction" EntityType="Self.TB_direction" />
+          <EntitySet Name="TB_employe" EntityType="Self.TB_employe" />
+          <EntitySet Name="TB_livraison" EntityType="Self.TB_livraison" />
+          <EntitySet Name="TB_mouvement_stock" EntityType="Self.TB_mouvement_stock" />
+          <EntitySet Name="TB_stock" EntityType="Self.TB_stock" />
+          <EntitySet Name="TB_user" EntityType="Self.TB_user" />
+          <AssociationSet Name="FK_TB_articles_TB_categorie" Association="Self.FK_TB_articles_TB_categorie">
+            <End Role="TB_categorie" EntitySet="TB_categorie" />
+            <End Role="TB_articles" EntitySet="TB_articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_employe_TB_direction" Association="stockfaesdbModel.FK_TB_employe_TB_direction">
+            <End Role="TB_direction" EntitySet="TB_direction" />
+            <End Role="TB_employe" EntitySet="TB_employe" />
+          </AssociationSet>
+          <EntitySet Name="FileDetails" EntityType="stockfaesdbModel.FileDetail" />
+          <AssociationSet Name="FK_TB_stock_TB_articles" Association="stockfaesdbModel.FK_TB_stock_TB_articles">
+            <End Role="TB_articles" EntitySet="TB_articles" />
+            <End Role="TB_stock" EntitySet="TB_stock" />
+          </AssociationSet>
+          <EntitySet Name="TB_bonEntre" EntityType="stockfaesdbModel.TB_bonEntre" />
+          <EntitySet Name="TB_bonRequisition2" EntityType="stockfaesdbModel.TB_bonRequisition" />
+          <EntitySet Name="TB_detail_requisition" EntityType="stockfaesdbModel.TB_detail_requisition" />
+          <EntitySet Name="TB_detail_sortie" EntityType="stockfaesdbModel.TB_detail_sortie" />
+          <EntitySet Name="TB_lot_entrestock" EntityType="stockfaesdbModel.TB_lot_entrestock" />
+          <AssociationSet Name="FK_TB_lot_entrestock_TB_articles" Association="stockfaesdbModel.FK_TB_lot_entrestock_TB_articles">
+            <End Role="TB_articles" EntitySet="TB_articles" />
+            <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_bonEntre_TB_livraison" Association="stockfaesdbModel.FK_TB_bonEntre_TB_livraison">
+            <End Role="TB_livraison" EntitySet="TB_livraison" />
+            <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TB_lot_entrestock_TB_bonEntre" Association="stockfaesdbModel.FK_TB_lot_entrestock_TB_bonEntre">
+            <End Role="TB_bonEntre" EntitySet="TB_bonEntre" />
+            <End Role="TB_lot_entrestock" EntitySet="TB_lot_entrestock" />
+          </AssociationSet>
+          <EntitySet Name="TB_bonSortie_stock" EntityType="stockfaesdbModel.TB_bonSortie_stock" />
+        </EntityContainer>
+        <Association Name="FK_TB_employe_TB_direction">
+          <End Type="stockfaesdbModel.TB_direction" Role="TB_direction" Multiplicity="0..1" />
+          <End Type="stockfaesdbModel.TB_employe" Role="TB_employe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_direction">
+              <PropertyRef Name="Id_direction" />
+            </Principal>
+            <Dependent Role="TB_employe">
+              <PropertyRef Name="Id_direction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FileDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Idlivraison" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_TB_stock_TB_articles">
+          <End Type="stockfaesdbModel.TB_articles" Role="TB_articles" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="stockfaesdbModel.TB_stock" Role="TB_stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_articles">
+              <PropertyRef Name="Id_articles" />
+            </Principal>
+            <Dependent Role="TB_stock">
+              <PropertyRef Name="Id_articles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_bonEntre">
+          <Key>
+            <PropertyRef Name="Id_bon_entrestock" />
+          </Key>
+          <Property Name="Id_bon_entrestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_entre" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Id_livraison" Type="Int32" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TB_livraison" Relationship="stockfaesdbModel.FK_TB_bonEntre_TB_livraison" FromRole="TB_bonEntre" ToRole="TB_livraison" />
+          <NavigationProperty Name="TB_lot_entrestock" Relationship="stockfaesdbModel.FK_TB_lot_entrestock_TB_bonEntre" FromRole="TB_bonEntre" ToRole="TB_lot_entrestock" />
+        </EntityType>
+        <EntityType Name="TB_bonRequisition">
+          <Key>
+            <PropertyRef Name="Id_bon_requisition" />
+          </Key>
+          <Property Name="Id_bon_requisition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="aprouvepar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Id_emloye" Type="Int32" />
+          <Property Name="Date_requisition" Type="DateTime" Precision="0" />
+          <Property Name="DateCeer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TB_detail_requisition">
+          <Key>
+            <PropertyRef Name="id_details_requisition" />
+          </Key>
+          <Property Name="id_details_requisition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_bon_requisition" Type="Int32" Nullable="false" />
+          <Property Name="Id_articles" Type="Int32" Nullable="false" />
+          <Property Name="Quantite" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_detail_sortie">
+          <Key>
+            <PropertyRef Name="Id_details_sortie" />
+          </Key>
+          <Property Name="Id_details_sortie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_bonsortie" Type="Int32" />
+          <Property Name="Id_lot_entrestock" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TB_lot_entrestock">
+          <Key>
+            <PropertyRef Name="Id_lot_entrestock" />
+          </Key>
+          <Property Name="Id_lot_entrestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_entrer" Type="DateTime" Precision="3" />
+          <Property Name="Id_articles" Type="Int32" />
+          <Property Name="Id_bon_entrestock" Type="Int32" />
+          <Property Name="Quantite" Type="Int32" />
+          <NavigationProperty Name="TB_articles" Relationship="stockfaesdbModel.FK_TB_lot_entrestock_TB_articles" FromRole="TB_lot_entrestock" ToRole="TB_articles" />
+          <NavigationProperty Name="TB_bonEntre" Relationship="stockfaesdbModel.FK_TB_lot_entrestock_TB_bonEntre" FromRole="TB_lot_entrestock" ToRole="TB_bonEntre" />
+          <Property Name="Total" Type="Int64" />
+        </EntityType>
+        <Association Name="FK_TB_lot_entrestock_TB_articles">
+          <End Type="stockfaesdbModel.TB_articles" Role="TB_articles" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="stockfaesdbModel.TB_lot_entrestock" Role="TB_lot_entrestock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_articles">
+              <PropertyRef Name="Id_articles" />
+            </Principal>
+            <Dependent Role="TB_lot_entrestock">
+              <PropertyRef Name="Id_articles" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_bonEntre_TB_livraison">
+          <End Type="stockfaesdbModel.TB_livraison" Role="TB_livraison" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="stockfaesdbModel.TB_bonEntre" Role="TB_bonEntre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_livraison">
+              <PropertyRef Name="Id_livraison" />
+            </Principal>
+            <Dependent Role="TB_bonEntre">
+              <PropertyRef Name="Id_livraison" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TB_lot_entrestock_TB_bonEntre">
+          <End Type="stockfaesdbModel.TB_bonEntre" Role="TB_bonEntre" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="stockfaesdbModel.TB_lot_entrestock" Role="TB_lot_entrestock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_bonEntre">
+              <PropertyRef Name="Id_bon_entrestock" />
+            </Principal>
+            <Dependent Role="TB_lot_entrestock">
+              <PropertyRef Name="Id_bon_entrestock" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TB_bonSortie_stock">
+          <Key>
+            <PropertyRef Name="Id_bon_sortiestock" />
+          </Key>
+          <Property Name="Id_bon_sortiestock" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Id_employe" Type="Int32" />
+          <Property Name="Date_sortie" Type="DateTime" Precision="0" />
+          <Property Name="DateCreer" Type="DateTime" Precision="3" />
+          <Property Name="CreerPar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="stockfaesdbModelStoreContainer" CdmEntityContainer="stockfaesdbEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="stockfaesdbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_articles">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_articles">
+              <MappingFragment StoreEntitySet="TB_articles">
+                <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+                <ScalarProperty Name="Nom_articles" ColumnName="Nom_articles" />
+                <ScalarProperty Name="Qte_alerte" ColumnName="Qte_alerte" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id_categorie" ColumnName="Id_categorie" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_categorie">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_categorie">
+              <MappingFragment StoreEntitySet="TB_categorie">
+                <ScalarProperty Name="Id_categorie" ColumnName="Id_categorie" />
+                <ScalarProperty Name="Nom_categorie" ColumnName="Nom_categorie" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_direction">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_direction">
+              <MappingFragment StoreEntitySet="TB_direction">
+                <ScalarProperty Name="Id_direction" ColumnName="Id_direction" />
+                <ScalarProperty Name="Nom_direction" ColumnName="Nom_direction" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_employe">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_employe">
+              <MappingFragment StoreEntitySet="TB_employe">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id_employe" ColumnName="Id_employe" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Id_direction" ColumnName="Id_direction" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_livraison">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_livraison">
+              <MappingFragment StoreEntitySet="TB_livraison">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Id_livraison" ColumnName="Id_livraison" />
+                <ScalarProperty Name="Code_fiche" ColumnName="Code_fiche" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Image_fiche" ColumnName="Image_fiche" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_mouvement_stock">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_mouvement_stock">
+              <MappingFragment StoreEntitySet="TB_mouvement_stock">
+                <ScalarProperty Name="Id_mouvement" ColumnName="Id_mouvement" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="Type_mouvement" ColumnName="Type_mouvement" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+                <ScalarProperty Name="Id_article" ColumnName="Id_article" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_stock">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_stock">
+              <MappingFragment StoreEntitySet="TB_stock">
+                <ScalarProperty Name="Id_stock" ColumnName="Id_stock" />
+                <ScalarProperty Name="Stock_initial" ColumnName="Stock_initial" />
+                <ScalarProperty Name="Qte_entre" ColumnName="Qte_entre" />
+                <ScalarProperty Name="Qte_sortie" ColumnName="Qte_sortie" />
+                <ScalarProperty Name="Qte_reste" ColumnName="Qte_reste" />
+                <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_user">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_user">
+              <MappingFragment StoreEntitySet="TB_user">
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Motdepasse" ColumnName="Motdepasse" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileDetails">
+            <EntityTypeMapping TypeName="stockfaesdbModel.FileDetail">
+              <MappingFragment StoreEntitySet="FileDetail">
+                <ScalarProperty Name="Idlivraison" ColumnName="Idlivraison" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_bonEntre">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonEntre">
+              <MappingFragment StoreEntitySet="TB_bonEntre">
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="Id_livraison" ColumnName="Id_livraison" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date_entre" ColumnName="Date_entre" />
+                <ScalarProperty Name="Id_bon_entrestock" ColumnName="Id_bon_entrestock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_bonRequisition2">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonRequisition">
+              <MappingFragment StoreEntitySet="TB_bonRequisition">
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+                <ScalarProperty Name="DateCeer" ColumnName="DateCeer" />
+                <ScalarProperty Name="Date_requisition" ColumnName="Date_requisition" />
+                <ScalarProperty Name="Id_emloye" ColumnName="Id_emloye" />
+                <ScalarProperty Name="aprouvepar" ColumnName="aprouvepar" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id_bon_requisition" ColumnName="Id_bon_requisition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_detail_requisition">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_detail_requisition">
+              <MappingFragment StoreEntitySet="TB_detail_requisition">
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+                <ScalarProperty Name="Id_bon_requisition" ColumnName="Id_bon_requisition" />
+                <ScalarProperty Name="id_details_requisition" ColumnName="id_details_requisition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_detail_sortie">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_detail_sortie">
+              <MappingFragment StoreEntitySet="TB_detail_sortie">
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="Id_lot_entrestock" ColumnName="Id_lot_entrestock" />
+                <ScalarProperty Name="Id_bonsortie" ColumnName="Id_bonsortie" />
+                <ScalarProperty Name="Id_details_sortie" ColumnName="Id_details_sortie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_lot_entrestock">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_lot_entrestock">
+              <MappingFragment StoreEntitySet="TB_lot_entrestock">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="Id_bon_entrestock" ColumnName="Id_bon_entrestock" />
+                <ScalarProperty Name="Id_articles" ColumnName="Id_articles" />
+                <ScalarProperty Name="Date_entrer" ColumnName="Date_entrer" />
+                <ScalarProperty Name="Id_lot_entrestock" ColumnName="Id_lot_entrestock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_bonSortie_stock">
+            <EntityTypeMapping TypeName="stockfaesdbModel.TB_bonSortie_stock">
+              <MappingFragment StoreEntitySet="TB_bonSortie_stock">
+                <ScalarProperty Name="CreerPar" ColumnName="CreerPar" />
+                <ScalarProperty Name="DateCreer" ColumnName="DateCreer" />
+                <ScalarProperty Name="Date_sortie" ColumnName="Date_sortie" />
+                <ScalarProperty Name="Id_employe" ColumnName="Id_employe" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Id_bon_sortiestock" ColumnName="Id_bon_sortiestock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
